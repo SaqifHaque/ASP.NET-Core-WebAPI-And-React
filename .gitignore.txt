@@ -1,6 +1,0 @@
-/.vs
-/.git
-
-/RestaurantAPI/bin/
-/RestaurantAPI/obj/
-/RestaurantAPI/Properties/
