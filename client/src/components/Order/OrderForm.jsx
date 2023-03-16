@@ -10,33 +10,8 @@ const pMethods = [
   {id: 'Card', title: 'Card'},
 ]
 
-const generateOrderNumber = () => Math.floor(100000 * Math.random() * 900000).toString();
-
-const getFreshModelObject = () => ({
-  orderMasterId: 0,
-  orderNumber: generateOrderNumber(),
-  customerId: 0,
-  pMethod: 'none',
-  gTotal: 0,
-  deletedOrderItemIds : '',
-  orderDetails:[]
-})
-
-const OrderForm = () => {
-  const [values, setValues] = useState(getFreshModelObject);
-
-  const handleInputChange = e => {
-    const {name, value} = e.target;
-    setValues({
-      ...values,
-      [name]: value
-    })
-  }
-
-  const resetFormControls = () => {
-    setValues(getFreshModelObject());
-  }
-  
+const OrderForm = (props) => {
+  const {values, errors, handleInputChange } = props;
   return (
     <Form>
       <Grid container>
