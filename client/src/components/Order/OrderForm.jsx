@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from "../../layouts/Form";
 import { ButtonGroup, Grid, InputAdornment, makeStyles, Button as MuiButton } from "@material-ui/core";
 import Input from "../../controls/Input";
@@ -7,6 +7,7 @@ import Button from "../../controls/Button";
 import ReplayIcon from '@material-ui/icons/Replay';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import ReorderIcon from '@material-ui/icons/Reorder';
+import { createApiEndpoint, ENDPOINTS } from '../../api';
 
 
 const pMethods = [
@@ -39,6 +40,21 @@ const useStyles = makeStyles(theme =>  ({
 const OrderForm = (props) => {
   const {values, errors, handleInputChange } = props;
   const classes = useStyles();
+  const [ customerList, setCustomerList ] = useState([]);
+
+  useEffect(() => {
+    createApiEndpoint(ENDPOINTS.CUSTOMER).fetchAll()
+    .then(res => {
+      let customerList = res.data.map((item) => ({
+        id: item.customerId,
+        title: item.customerName 
+      }))
+      customerList = [{ id: 0, title: 'Select' }].concat(customerList);
+      setCustomerList(customerList);
+    } )
+    .catch((err) => console.log(err));
+  }, [])
+  
   
   return (
     <Form>
@@ -50,7 +66,7 @@ const OrderForm = (props) => {
               position="start"
               className={classes.adornmentText}>#</InputAdornment>
             }} name="orderNumber"/>
-            <Select label="Customer" onChange={handleInputChange} value={values.customerId} name="customerId" options={[]} />
+            <Select label="Customer" onChange={handleInputChange} value={values.customerId} name="customerId" options={customerList} />
         </Grid>
         <Grid item xs={6}>
           <Select label="Payment Method" value={values.pMethod}  onChange={handleInputChange} name="pMethod" options={pMethods} />
