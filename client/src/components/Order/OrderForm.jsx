@@ -3,6 +3,11 @@ import Form from "../../layouts/Form";
 import { ButtonGroup, Grid, InputAdornment, makeStyles, Button as MuiButton } from "@material-ui/core";
 import Input from "../../controls/Input";
 import Select from "../../controls/Select";
+import Button from "../../controls/Button";
+import ReplayIcon from '@material-ui/icons/Replay';
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
+import ReorderIcon from '@material-ui/icons/Reorder';
+
 
 const pMethods = [
   {id: 'none', title: 'Select'},
@@ -16,6 +21,17 @@ const useStyles = makeStyles(theme =>  ({
       color: '#f3b33d',
       fontWeight: 'border',
       fontSize: '1.5em'
+    }
+  },
+  submitButtonGroup: {
+    backgroundColor: '#f3b33d',
+    color: '#000',
+    margin: theme.spacing(1),
+    '& .MuiButton-label': {
+      textTransfrom: 'none',
+    },
+    '& hover': {
+      backgroundColor: '#f3b33d'
     }
   }
 }))
@@ -44,9 +60,11 @@ const OrderForm = (props) => {
             position="start"
             className={classes.adornmentText}>$</InputAdornment>
           }} name="gTotal"/>
-          <ButtonGroup>
-              <MuiButton size="large"/>
+          <ButtonGroup className={classes.submitButtonGroup}>
+              <MuiButton size="large" endIcon={<RestaurantMenuIcon/>} type="submit">Submit</MuiButton>
+              <MuiButton size="small" startIcon={<ReplayIcon/>}>Submit</MuiButton>
           </ButtonGroup>
+          <Button size='large' startIcon={<ReorderIcon/>}>Orders</Button>
         </Grid>
       </Grid>
     </Form>
