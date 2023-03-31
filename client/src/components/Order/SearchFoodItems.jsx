@@ -17,7 +17,23 @@ const useStyles = makeStyles (theme => ({
     flex: 1
   },
   listRoot: {
-    
+    marginTop: theme.spacing(),
+    maxHeight: 450,
+    overflow: 'auto',
+    '& li:hover': {
+      cursor: 'pointer',
+      backgroundColor: '#E3E3E3'
+    },
+    '& li:hover .MuiButtonBase-root': {
+      display: 'block',
+      color: '#000'
+    },
+    '& .MuiButtonBase-root': {
+      display: 'none'
+    },
+    '& .MuiButtonBase-root:hover': {
+      backgroundColor: 'transparent'
+    }
   }
 }))
 
@@ -56,7 +72,7 @@ const SearchFoodItems = () => {
           <SearchTwoToneIcon />
         </IconButton>
     </Paper>
-    <List>
+    <List className={classes.listRoot}>
       {
         searchList.map((items, index) => (
           <ListItem key={index}>
