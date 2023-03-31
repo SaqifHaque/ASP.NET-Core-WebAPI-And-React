@@ -37,8 +37,9 @@ const useStyles = makeStyles (theme => ({
   }
 }))
 
-const SearchFoodItems = () => {
+const SearchFoodItems = (props) => {
 
+    const  { addFoodItem } = props;
     const [foodItems, setFoodItems] = useState([]);
     const [searchList, setSearchList] = useState([]);
     const [searchKey, setSearchKey] = useState("");
@@ -74,11 +75,11 @@ const SearchFoodItems = () => {
     </Paper>
     <List className={classes.listRoot}>
       {
-        searchList.map((items, index) => (
+        searchList.map((item, index) => (
           <ListItem key={index}>
-            <ListItemText primary={items.foodItemName} secondary= {'$' + items.price}/>
+            <ListItemText primary={item.foodItemName} secondary= {'$' + item.price}/>
             <ListItemSecondaryAction>
-              <IconButton>
+              <IconButton onClick={e => addFoodItem(item)}>
                   <PlusOneIcon/>
                   <ArrowForwardIosIcon/>
               </IconButton>

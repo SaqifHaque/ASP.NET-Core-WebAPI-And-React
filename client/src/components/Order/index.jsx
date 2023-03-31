@@ -39,15 +39,19 @@ const Order = () => {
     setValues({...values, orderDetails: [...values.orderDetails, item]})
   }
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <OrderForm {...{values, errors, handleInputChange}}/>
       </Grid>
       <Grid item xs={6}>
-          <SearchFoodItems/>
+          <SearchFoodItems
+          {...{addFoodItem}}
+          />
       </Grid>
       <Grid item xs={6}>
-          <OrderedFoodItems/>
+          <OrderedFoodItems
+          {...{orderedFoodItems: values.orderDetails}}
+          />
       </Grid>
     </Grid>
   )
