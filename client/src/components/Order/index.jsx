@@ -26,6 +26,18 @@ const Order = () => {
     handleInputChange,
     resetFormControls
   } = useForm(getFreshModelObject);
+
+  const addFoodItem = foodItem => {
+    let item = {
+      orderMasterId: values.orderMasterId,
+      orderDetailId: 0,
+      foodItemId: foodItem.foodItemId,
+      quantity: 1,
+      foodItemPrice: foodItem.foodItemPrice,
+      foodItemName: foodItem.foodItemName
+    }
+    setValues({...values, orderDetails: [...values.orderDetails, item]})
+  }
   return (
     <Grid container>
       <Grid item xs={12}>
