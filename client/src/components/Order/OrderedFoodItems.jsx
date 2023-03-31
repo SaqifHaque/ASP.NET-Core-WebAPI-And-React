@@ -3,7 +3,27 @@ import React from 'react'
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 
 const OrderedFoodItems = (props) => {
-  const { orderedFoodItems, removeFoodItem } = props;
+  const { values, setValues } = props;
+
+  let orderedFoodItems = values.orderDetails;
+
+  const updateQuantity = (index, value) => {
+    let quantity = {...values};
+    let foodItem = quantity.orderDetails[index];
+    if(foodItem.quantity + value > 0){
+      foodItem.quantity += value;
+      setValues({...quantity}); 
+    }
+  }
+
+  const removeFoodItem = (index, id) => {
+    let item = {...values};
+    item.orderDetails = item.orderDetails.filter((_, i) => i !== index);
+    setValues({...item});
+
+    setValues({...values, orderDetails: [...values.orderDetails, item]})
+  }
+
   return (
     <List>
         {
@@ -20,9 +40,9 @@ const OrderedFoodItems = (props) => {
                   secondary= {
                     <>
                       <ButtonGroup size="small">
-                        <Button>-</Button>
+                        <Button onClick={e => updateQuantity(index, -1)}>-</Button>
                         <Button disabled>{item.quantity}</Button>
-                        <Button>+</Button>
+                        <Button onClick={e => updateQuantity(index, 1)}>+</Button>
                       </ButtonGroup>
                     </>
                   }>

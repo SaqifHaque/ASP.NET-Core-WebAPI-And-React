@@ -38,13 +38,7 @@ const Order = () => {
     }
   }
 
-  const removeFoodItem = (index, id) => {
-    let item = {...values};
-    item.orderDetails = item.orderDetails.filter((_, i) => i !== index);
-    setValues({...item});
 
-    setValues({...values, orderDetails: [...values.orderDetails, item]})
-  }
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -57,7 +51,7 @@ const Order = () => {
       </Grid>
       <Grid item xs={6}>
           <OrderedFoodItems
-          {...{orderedFoodItems: values.orderDetails, removeFoodItem}}
+          {...{values, setValues}}
           />
       </Grid>
     </Grid>
