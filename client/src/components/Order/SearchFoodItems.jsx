@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { createApiEndpoint, ENDPOINTS } from '../../api'
 import { IconButton, InputBase, List, ListItem, ListItemSecondaryAction, ListItemText, makeStyles, Paper } from '@material-ui/core';
-import SearchTwoToneIcon from 'material-ui/icons/SearchTwoToneIcon';
+import SearchTwoToneIcon from 'material-ui/icons/SearchTwoTone';
 import PlusOneIcon from 'material-ui/icons/PlusOneIcon';
-import ArrowForwardIosIcon from 'material-ui/icons/ArrowForwardIosIcon';
+import ArrowForwardIosIcon from 'material-ui/icons/ArrowForwardIos';
 
 
 const useStyles = makeStyles (theme => ({
