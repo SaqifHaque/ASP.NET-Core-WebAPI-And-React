@@ -39,11 +39,13 @@ const useStyles = makeStyles (theme => ({
 
 const SearchFoodItems = (props) => {
 
-    const  { addFoodItem, orderedFoodItems } = props;
+    const  { values, setValues } = props;
     const [foodItems, setFoodItems] = useState([]);
     const [searchList, setSearchList] = useState([]);
     const [searchKey, setSearchKey] = useState("");
     const classes = useStyles();  
+
+    let orderedFoodItems = values;
 
     useEffect(() => {
         createApiEndpoint(ENDPOINTS.FOODITEM).fetchAll()
@@ -63,6 +65,18 @@ const SearchFoodItems = (props) => {
       setSearchList(search);
 
     }, [searchKey, orderedFoodItems])
+
+    const addFoodItem = foodItem => {
+      let item = {
+        orderMasterId: values.orderMasterId,
+        orderDetailId: 0,
+        foodItemId: foodItem.foodItemId,
+        quantity: 1,
+        foodItemPrice: foodItem.foodItemPrice,
+        foodItemName: foodItem.foodItemName
+      }
+      setValues({...values, orderDetails: [...values, orderedFoodItems.item]})
+    }
     
     
   return (
@@ -77,7 +91,7 @@ const SearchFoodItems = (props) => {
     <List className={classes.listRoot}>
       {
         searchList.map((item, index) => (
-          <ListItem key={index}>
+          <ListItem key={index} onClick={e => addFoodItem(item)}>
             <ListItemText primary={item.foodItemName} secondary= {'$' + item.price}/>
             <ListItemSecondaryAction>
               <IconButton onClick={e => addFoodItem(item)}>
