@@ -1,4 +1,4 @@
-import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from '@material-ui/core';
+import { Button, ButtonGroup, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from '@material-ui/core';
 import React from 'react'
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 
@@ -16,7 +16,16 @@ const OrderedFoodItems = (props) => {
                       fontWeight: '500',
                       fontSize: '1.2em'
                     }
-                  }}>
+                  }}
+                  secondary= {
+                    <>
+                      <ButtonGroup size="small">
+                        <Button>-</Button>
+                        <Button disabled>{item.quantity}</Button>
+                        <Button>+</Button>
+                      </ButtonGroup>
+                    </>
+                  }>
                     <ListItemSecondaryAction>
                       <IconButton disableRipple onClick={e => removeFoodItem(index, item.orderDetailsId)}>
                         <DeleteTwoToneIcon/>

@@ -52,7 +52,7 @@ const Order = () => {
       </Grid>
       <Grid item xs={6}>
           <SearchFoodItems
-          {...{addFoodItem}}
+          {...{addFoodItem, orderedFoodItems: values.orderDetails}}
           />
       </Grid>
       <Grid item xs={6}>
