@@ -72,7 +72,7 @@ const SearchFoodItems = (props) => {
         orderDetailId: 0,
         foodItemId: foodItem.foodItemId,
         quantity: 1,
-        foodItemPrice: foodItem.foodItemPrice,
+        foodItemPrice: foodItem.price,
         foodItemName: foodItem.foodItemName
       }
       setValues({...values, orderDetails: [...values, orderedFoodItems.item]})

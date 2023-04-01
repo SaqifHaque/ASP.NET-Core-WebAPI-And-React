@@ -1,6 +1,7 @@
 import { Button, ButtonGroup, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from '@material-ui/core';
 import React from 'react'
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import { roundTo2DecimalPoint  } from '../../utils';
 
 const OrderedFoodItems = (props) => {
   const { values, setValues } = props;
@@ -44,8 +45,14 @@ const OrderedFoodItems = (props) => {
                         <Button disabled>{item.quantity}</Button>
                         <Button onClick={e => updateQuantity(index, 1)}>+</Button>
                       </ButtonGroup>
+                      <span>
+                        {'$' + roundTo2DecimalPoint(item.quantity*item.foodItemPrice)}
+                      </span>
                     </>
-                  }>
+                  }
+                  secondaryTypographyProps={{
+                    component: 'div'
+                  }}>
                     <ListItemSecondaryAction>
                       <IconButton disableRipple onClick={e => removeFoodItem(index, item.orderDetailsId)}>
                         <DeleteTwoToneIcon/>
